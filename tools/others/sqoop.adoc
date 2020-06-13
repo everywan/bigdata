@@ -1,0 +1,23 @@
+= Sqoop
+
+.文档
+. http://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html[官方文档]
+. https://www.cnblogs.com/xiaodf/p/6030102.html[中文文档(民间总结)]
+
+[[use]]
+== 使用
+
+[[incremental]]
+=== 增量更新
+增量更新 `--incremental`.
+
+.分别使用三个字段
+. `--incremental`: 使用增量, 且指定增量更新的方式
+. `--check-column`: 更新时检查的列
+. `--last-value`: check-column 的值大于此值才会被导入
+
+.incremental 的两种方式
+. append: 适用于已导入的数据不会发生变化, 只是数据追加的场景. check-column 一般是 id.
+. lastmodified: 适用于已导入的数据可能发生变化, 源数据更新情况较多的场景. check-column 一般是 timestamp.
+
+更新的方式都是检测 check-column 的列, 当该字段的值大于 last-value 时将该数据导入.
